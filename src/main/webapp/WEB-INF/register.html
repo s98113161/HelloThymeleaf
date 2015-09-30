@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" media="all" href="../../css/table.css" th:href="@{/css/table.css}"/>
+<title>Register</title>
+</head>
+<body>
+	<h1>Register Page</h1>
+	<table>
+		<form name="register" action="index_submit" method="get"
+			style="text-align: center;" th:action="@{/login.html}" accept-charset="utf-8">
+		<tr>
+			<td><label for="account">Account：</label></td>
+			<td><input type="text" name="account"> </input></td>
+		</tr>
+		<tr>
+			<td><label for="password">Password：</label></td>
+			<td><input type="password" name="password"></input></td>
+		</tr>
+		<tr>
+			<td><label for="confirm_password">Confirm_Password：</label></td>
+			<td><input type="password" name="confirm_password"></input></td>
+		</tr>
+		<tr>
+			<td colspan="2" style="text-align: center;"><input style="margin: 10px; padding: 10px;" 
+				type="submit" value="submit"></input></td>
+		</tr>
+		</form>
+
+	</table>
+
+
+</body>
+</html>

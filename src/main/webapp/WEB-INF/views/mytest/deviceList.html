@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>
+
+</style>
+<title>DeviceList</title>
+</head>
+<body>
+	<h1>DeviceList</h1>
+	<table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
+
+	<!-- Table Header -->
+	<thead>
+		<tr>
+			<th>Device ID</th>
+			<th>Device Name</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<!-- Table Header -->
+
+	<!-- Table Body -->
+	<tbody>
+
+		<tr>
+			<td>00</td>
+			<td>Aaa</td>
+			<td><a href="http://gooogle.com">remove</a></td>
+		</tr><!-- Table Row -->
+
+		<tr class="even">
+			<td>02</td>
+			<td>Bbb</td>
+			<td><a href="http://gooogle.com">remove</a></td>
+		</tr><!-- Darker Table Row -->
+
+		<tr>
+			<td>05</td>
+			<td>Ccc</td>
+			<td><a href="http://gooogle.com">remove</a></td>
+		</tr>
+
+		<tr class="even">
+			<td>08</td>
+			<td>Ddd</td>
+			<td><a href="http://gooogle.com">remove</a></td>
+		</tr>
+
+		<tr>
+			<td>09</td>
+			<td>Foo</td>
+			<td><a href="http://gooogle.com">remove</a></td>
+		</tr>
+
+		<tr class="even">
+			<td>10</td>
+			<td>Bar</td>
+			<td><a href="http://gooogle.com">remove</a></td>
+		</tr>
+
+		<tr>
+			<td>15</td>
+			<td>Ooo</td>
+			<td><a href="http://gooogle.com">remove</a></td>
+		</tr>
+
+		<tr class="even">
+			<td>18</td>
+			<td>80%</td>
+			<td><a href="http://gooogle.com">remove</a></td>
+		</tr>
+
+	</tbody>
+	<!-- Table Body -->
+
+</table>
+	<h2>Add Device</h2>
+	<form action="">
+		<table class="addDevice" style="width: auto;">
+			<tr>
+				<th>Device Name:</th>
+				<td><input type="text"></input></td>
+			</tr>
+
+			<tr>
+				<td colspan="2"><input  type="submit" style="width: 100%"></input></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

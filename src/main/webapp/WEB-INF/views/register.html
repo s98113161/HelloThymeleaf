@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/additional-methods.min.js"></script>
+<script src="js/messages_zh_TW.js"></script>
+<script type='text/javascript' src="js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" type="text/css" media="all"
+	href="../../css/main.css" th:href="@{/css/main.css}" />
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
+<!-- Optional theme -->
+<link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
+<!-- Latest compiled and minified JavaScript -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<style>
+.error {
+    color:red;
+    font-size: 18px;
+}
+</style>
+<title>Register</title>
+</head>
+<body>
+	<div class="table" >
+	<h1 th:text="#{register.title}">Register Page</h1>
+	
+		<form id="login" name="login" action="index_submit" method="get" th:action="@{/deviceList.html}"
+			accept-charset="utf-8">
+			<div><input id="account" name="account" type="text" class="enjoy-css" placeholder="Account" th:placeholder="#{register.account}"/></div>
+			<div><input  id="password" name="password" type="password" class="enjoy-css" th:placeholder="#{register.password}" /></div>
+			<div><input id="comfirm_password" name="comfirm_password" type="password" class="enjoy-css" placeholder="Comfirm_Password"  th:placeholder="#{register.confirmpassword}"/></div>
+			<div><input type="submit" class="myButtonRed"  value="Submit" th:value="#{register.submit}"></input></div>
+	
+		</form>
+	
+	</div>
+
+	<script>
+	jQuery.validator.setDefaults({
+		  debug: false,
+		  success: "valid"
+		});
+		$( "#login" ).validate({
+		  rules: {
+			  account:{required:true},
+			  password: "required",
+			  comfirm_password: {
+		      equalTo: "#password"
+		    }
+		  },
+		  
+		  submitHandler: function (form) { // for demo
+	            alert('valid form submitted'); // for demo
+	            return true; // for demo
+	        }
+		});
+		jQuery.extend(jQuery.validator.messages, {
+			required:"有欄位尚未填寫。",
+		    equalTo: "兩次密碼不相同，請再次輸入密碼。",
+		   
+		});
+	</script>
+</body>
+</html>

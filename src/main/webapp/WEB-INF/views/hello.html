@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+        <title>Spring Thyme Seed Starter Manager</title>
+    	 <script src="js/jquery-2.1.4.min.js" ></script>
+ 		 <script src="js/websocket/sockjs.js" ></script>
+ 		 <script src="js/websocket/stomp.js" ></script>
+		 <script src="js/highcharts.js" ></script>
+		 <script >
+		 $(document).ready(function() {
+			   var socket = new SockJS('/HelloThymeleaf/test');
+				stompClient = Stomp.over(socket);
+	            stompClient.connect({}, function(frame) {
+	              
+	                console.log('Connected: ' + frame);
+	                stompClient.subscribe('/broadcast/showResult', function(calResult){
+	                	showResult(JSON.parse(calResult.body).result);
+	                });
+	                stompClient.subscribe('/user/queue/search', function(data){
+	                    alert(data.body);
+	                });
+	            });
+		 });
+		 function queueBtn(){
+			 stompClient.send(
+						"/receive" + //matches messageBrokerRegistry.setApplicationDestinationPrefixes()
+						"/search", // matches the @MessageMapping annotation in our @Controller
+						{}, //如果你有spring security 這裡可以放帳密		
+						JSON.stringify({
+							'name' : 'tuser',
+							'message' : 'tmsg'
+						}));
+					}
+			 
+		 
+		 function sendNum() {
+	            var name = document.getElementById('name').value;
+	            var message = document.getElementById('message').value;
+	            
+	        
+				stompClient.send(
+					"/receive" + //matches messageBrokerRegistry.setApplicationDestinationPrefixes()
+					"/add", // matches the @MessageMapping annotation in our @Controller
+					{}, //如果你有spring security 這裡可以放帳密		
+					JSON.stringify({
+						'name' : name,
+						'message' : message
+					}));
+				}
+				function showResult(message) {
+					var response = document.getElementById('showMsg');
+					var p = document.createElement('p');
+					p.style.wordWrap = 'break-word';
+					p.appendChild(document.createTextNode(message));
+					response.appendChild(p);
+					//scroll auto bottom
+					var objDiv = document.getElementById("scrollbar");
+					objDiv.scrollTop = objDiv.scrollHeight;
+				}
+			</script>
+</head>
+<body>
+
+	<h1 th:text="${hello}">Title</h1>
+	<h2 th:utext="#{home.welcome}">default text</h2>
+	<h3 th:utext="#{home.welcome(${hello})}">default text</h3>
+	<h4 th:text="${custom_model.email}"></h4>
+	
+	
+	 <div id="calculationDiv">
+        <label>Name:</label><input type="text" id="name" /><br/>
+        <label>Message:</label><input type="text" id="message" /><br/><br/>
+        <button id="sendNum" onclick="sendNum();">Send to Add</button>
+    </div>
+   <button id="queueBtn" onclick="queueBtn();">test</button>
+    <div  style="width: 450px; height: 450px; overflow: hidden;">
+		<div id="scrollbar" style="overflow: scroll; height: 500px; width: 500px">
+			<div id="showMsg"></div>
+		</div>
+	</div>
+</body>
+</html>

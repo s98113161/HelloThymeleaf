@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<!-- draw chart -->
+<script src="js/highcharts.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script th:inline="javascript">
+$(document).ready(function() {  
+	 /*<![CDATA[*/
+   var chart = {
+      type: 'spline',
+	  animation:Highcharts.svg, // don't animate in IE < IE 10.
+      marginRight: 10,
+	  events: {
+         load: function () {
+            // set up the updating of the chart each second
+            var series = this.series[0];
+            setInterval(function () {
+               var x = (new Date()).getTime(), // current time
+               y = Math.random();
+               series.addPoint([x, y], true, true);
+            }, 1000);
+         }
+      }
+   };
+   var title = {
+      text: 'Live random data'   
+   };   
+   var xAxis = {
+      type: 'datetime',
+      tickPixelInterval: 150
+   };
+   var yAxis = {
+      title: {
+         text: 'Value'
+      },
+      plotLines: [{
+         value: 0,
+         width: 1,
+         color: '#808080'
+      }]
+   };
+   var tooltip = {
+      formatter: function () {
+      return '<b>' + this.series.name + '</b><br/>' +
+         Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+         Highcharts.numberFormat(this.y, 2);
+      }
+   };
+   var plotOptions = {
+      area: {
+         pointStart: 1940,
+         marker: {
+            enabled: false,
+            symbol: 'circle',
+            radius: 2,
+            states: {
+               hover: {
+                 enabled: true
+               }
+            }
+         }
+      }
+   };
+   var legend = {
+      enabled: false
+   };
+   var exporting = {
+      enabled: false
+   };
+   var series= [{
+      name: 'Random data',
+      data: (function () {
+         // generate an array of random data
+         var data = [],time = (new Date()).getTime(),i;
+         for (i = -19; i <= 0; i += 1) {
+            data.push({
+               x: time + i * 1000,
+               y: Math.random()
+            });
+         }
+        
+         return data;
+      }())    
+   }];     
+      
+   var json = {};   
+   json.chart = chart; 
+   json.title = title;     
+   json.tooltip = tooltip;
+   json.xAxis = xAxis;
+   json.yAxis = yAxis; 
+   json.legend = legend;  
+   json.exporting = exporting;   
+   json.series = series;
+   json.plotOptions = plotOptions;
+   
+   
+   Highcharts.setOptions({
+      global: {
+         useUTC: false
+      }
+   });
+   $('#chart').highcharts(json);
+});
+/*]]>*/	
+</script>
+
+<style>
+body {
+	padding-top: 60px;
+	/* 60px to make the container go all the way to the bottom of the topbar */
+	padding-bottom: 40px;
+	background-color: #f5f5f5;
+}
+
+</style>
+<title>DeviceList</title>
+</head>
+<body>
+	<div class="header" th:replace="mytest/userHeader :: userHeader"></div>
+
+	<div class="container">
+		<h1 class="text-center">DeviceList</h1>
+		<div class="row">
+		<div class="col-md-12" id="chart"></div>
+		<div class="col-md-12">
+		<table class="table table-striped">
+			<thead>
+				<tr class="text-center">
+					<th>#</th>
+					<th>Name</th>
+					<th>Address</th>
+					<th>mail</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>Thomas bell</td>
+					<td>Brick lane, London</td>
+					<td>thomas@yahoo.com</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>Yan Chapel</td>
+					<td>Toronto Australia</td>
+					<td>Yan@yahoo.com</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>Pit Sampras</td>
+					<td>Berlin, Germany</td>
+					<td>Pit @yahoo.com</td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+	</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    ...
+  </head>
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top" th:fragment="adminHeader">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#" th:href="@{/}">My project</a>
+        </div>
+        <div class="navbar-collapse collapse" id="menu">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#" th:href="@{/}">Home</a></li>
+            <li><a href="#" th:href="@{/deviceList.html}">DeviceList</a></li>
+            <li><a href="#" th:href="@{/}">Tasks</a></li>
+          </ul>
+        
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

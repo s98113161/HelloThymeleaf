@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" type="text/css" media="all"
+	href="../../css/main.css" th:href="@{/css/main.css}" />
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<title>Login</title>
+</head>
+<body>
+	<div class="table">
+		<h1 th:text="#{login.title}" text="Login Page">Login Page</h1>
+
+		<form name="login" action="index_submit" method="get"
+			th:action="@{/deviceList.html}" accept-charset="utf-8">
+			<div>
+				<input name="account" type="text" class="enjoy-css"
+					placeholder="Account" th:placeholder="#{login.account}" />
+			</div>
+			<div>
+				<input name="password" type="password" class="enjoy-css"
+					placeholder="Password" th:placeholder="#{login.password}" />
+			</div>
+			<div>
+				<input type="submit" value="Submit" th:value="#{login.submit}"
+					class="myButtonRed"></input>
+			</div>
+			<!--  <tr><td><a class="myButtonBlue" th:href="@{/register.html}">Register Account</a></td></tr>-->
+			<div>
+				<a style="color:gray ;" th:text="#{login.msg.noaccount}">No Account¡H</a><a href="../register.html" th:text="#{login.msg.clickme}" th:href="@{/register.html} ">Click Me</a>
+			</div>
+
+		</form>
+
+
+	</div>
+</body>
+</html>
