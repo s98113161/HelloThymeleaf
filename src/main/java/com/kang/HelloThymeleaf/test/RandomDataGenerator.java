@@ -1,4 +1,4 @@
-//kage com.kang.HelloThymeleaf.test;
+//package com.kang.HelloThymeleaf.test;
 //
 //import java.util.Random;
 //

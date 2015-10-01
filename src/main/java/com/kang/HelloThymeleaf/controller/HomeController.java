@@ -131,18 +131,19 @@ public class HomeController {
 				return model;
 			}	
 	}
-		 @MessageMapping("/add" )
-//		    @SendTo("/topic/showResult")
-		    public void addNum(MessageInput input) throws Exception {
-			 	
-		        Result result = new Result(input.getName()+"："+input.getMessage()); 
-		        this.template.convertAndSend("/broadcast/showResult", result);
-//		        return result;
-		    }
-		 @MessageMapping("/search")
-		 @SendToUser // <- maps to "/user/queue/search"
-		 public String search(@Payload String xxx) {
-		     return "TEST1234";
-		 }
-	
+
+		//7.這裡會自動Binding 放進 叫做 input 的 instance，將結果做一些處理，最後使用SimpMessagingTemplate廣播給各個訂閱/topic/showResult的Client。
+		@MessageMapping("/add")
+		// @SendTo("/topic/showResult")
+		public void addNum(MessageInput input) throws Exception {
+			Result result = new Result(input.getName() + "：" + input.getMessage());
+			this.template.convertAndSend("/topic/showResult", result);
+			// return result;
+		}
+		//11.這裡會廣播訂閱/queue/search的Client
+		@MessageMapping("/search")
+		@SendToUser("/queue/search") // <- maps to "/user/queue/search"，其實括弧內的destination其實也可以省略
+		public String search(MessageInput input) {
+			return "(System)Hi " + input.getName() + " , This message only for you.";
+		}
 }
